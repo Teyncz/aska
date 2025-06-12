@@ -66,10 +66,10 @@ if (isset($_COOKIE['token'])) {
                         'username' => $rep['email'],
                         'firstname' => $rep['firstname'],
                         'lastname' => $rep['lastname'],
-                        'exp' => time() + 3600,
+                        'exp' => time() + 36000,
                     ];
                     $encode = JWT::encode($payload, $key, 'HS256');
-                    setcookie("token", $encode, time() + 3600);
+                    setcookie("token", $encode, time() + 36000);
                     header('Location: panel.php');
                     exit();
                 }
