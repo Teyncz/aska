@@ -1,0 +1,85 @@
+{% extends "base_panel.html.twig" %}
+
+{% block body %}
+	<section class="h-[100vh] w-[100vw] flex">
+		{% include 'nav_panel.html.twig' with { page } %}
+
+		<main class="flex flex-col w-full relative">
+			<section id="FormWrapper" class="z-999 h-full w-full absolute pl-[39px] pt-[50px] backdrop-blur-[1px] bg-[#00000044]" style="display : block;">
+				<div class="h-fit max-w-[800px] w-full bg-[#F4F6F8] shadow rounded-[5px] px-[20px] pb-[50px]">
+					<div class=" py-[15px] flex flex-col">
+						<div class="flex justify-between">
+							<h4 class="text-[18px] font-[500]">Ajouter un domaine</h4>
+							<button id="CloseFormBtn" type="button" class="cursor-pointer hover:scale-95 transition-all duration-100 group">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_18_2)">
+										<path class="group-hover:fill-[#C03C3A] transition-all duration-200" d="M11.7676 10.0002L19.634 2.13472C20.1223 1.64642 20.1223 0.854731 19.634 0.366469C19.1457 -0.121831 18.354 -0.121831 17.8658 0.366469L10.0002 8.23279L2.13472 0.366469C1.64642 -0.121831 0.854731 -0.121831 0.366469 0.366469C-0.121792 0.85477 -0.121831 1.64646 0.366469 2.13472L8.23279 10.0002L0.366469 17.8658C-0.121831 18.3541 -0.121831 19.1457 0.366469 19.634C0.85477 20.1223 1.64646 20.1223 2.13472 19.634L10.0002 11.7676L17.8657 19.634C18.354 20.1223 19.1457 20.1223 19.634 19.634C20.1223 19.1457 20.1223 18.354 19.634 17.8658L11.7676 10.0002Z" fill="#404040"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_18_2">
+											<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+								</svg>
+							</button>
+						</div>
+					</div>
+					<form class="flex flex-col gap-[20px]">
+						<div class="flex flex-col gap-[10px]">
+							<label class="text-[15px]">Nom du domaine</label>
+							<input autocomplete="off" class="h-[46px] rounded-[4px] border border-[#454545] px-[30px] max-w-[400px]" type="text" placeholder="Domaine" id="domain" name="domain" require/>
+						</div>
+						<div id="domainStatus" class="flex items-center gap-[10px]">
+							<span class="h-[10px] w-[10px] rounded-full"></span>
+							<p></p>
+						</div>
+						<div id="domainIp" class="flex items-center gap-[10px]">
+							<span class="h-[10px] w-[10px] rounded-full"></span>
+							<p></p>
+						</div>
+						<div id="apacheStatus" class="flex items-center gap-[10px]">
+							<span class="h-[10px] w-[10px] rounded-full"></span>
+							<p></p>
+						</div>
+						<button id="SubmitDomain" class="bg-[#404040] rounded-[4px] h-[30px] w-[250px] text-[14px] text-white hover:scale-97 transition duration-300 cursor-pointer" type="button">Ajouter</button>
+					</form>
+				</div>
+			</section>
+			<section class="flex flex-col w-full relative pl-[40px]">
+				<div class="pb-[40px] flex flex-col gap-[10px] mt-[40px]">
+					<h1 class="text-[36px] font-[500]">Domaines</h1>
+					<button id="ShowFormBtn" class="bg-[#404040] rounded-[4px] h-[30px] w-[250px] text-[14px] text-white hover:scale-97 transition duration-300 cursor-pointer">Ajouter un domaine</button>
+				</div>
+				<section>
+					<table class="flex flex-col gap-[30px]">
+						<thead>
+							<tr class="flex">
+								<th scope="col" class="w-[300px] flex justify-start text-[16px] font-[400]">Nom</th>
+								<th scope="col" class="w-[175px] flex justify-start text-[16px] font-[400]">Expiration</th>
+								<th scope="col" class="w-[150px] flex justify-start text-[16px] font-[400]">Hébergeur</th>
+								<th scope="col" class="w-[225px] flex justify-start text-[16px] font-[400]">Redirection</th>
+								<th scope="col" class="w-[300px] flex justify-start text-[16px] font-[400]">Configuration Apache</th>
+							</tr>
+						</thead>
+						<tbody class="flex flex-col gap-[20px]">
+							{% for domain in domains %}
+								<tr class="flex">
+									<th class="w-[300px] flex justify-start text-[16px] font-[300]" scope="row">{{domain.name}}</th>
+									<td class="w-[175px] flex justify-start text-[16px] font-[300]">{{domain.expiration}}</td>
+									<td class="w-[150px] flex justify-start text-[16px] font-[300]">{{domain.host}}</td>
+									<td class="w-[225px] flex justify-start text-[16px] font-[300]">{{domain.ip}}</td>
+									<td class="w-[300px] flex justify-start text-[16px] font-[300]">{{domain.apache_config}}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</section>
+			</section>
+		</main>
+	</section>
+
+{% endblock %}
+
+{% block scripts %}
+	 <script src="../public/script/add-domain.js"></script>
+{% endblock %}

@@ -1,3 +1,7 @@
+* {
+  scroll-behavior: smooth;
+}
+
 @font-face {
   font-family: "Kamerik105";
   src: url("/fonts/Kamerik105-Book.woff2") format("woff2");
@@ -33,17 +37,60 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SF-Pro-Display-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
 .SF {
   font-family: "SF Pro Display", sans-serif;
 }
 
-input:focus, input:focus-visible{
+input:focus, input:focus-visible, textarea{
     outline: none;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+input:-webkit-autofill:active,
+textarea{
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+}
+
+
+.cta{
+  z-index: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s;
+  cursor: pointer
+}
+
+.cta:hover {
+  color: #ffffff;
+  transition: all 0.2s;
+}
+
+.cta:hover::before {
+  transform: translateX(-100%);
+  transition: all 0.3s
+}
+
+.cta::before{
+  z-index: -1;
+  display: flex;
+  position: absolute;
+  content: '';
+  width: 300px;
+  height: 40px;
+  background: #ffffff;
+  transition: all 0.3s
+}
+
+.footer_gradiant{
+  background: linear-gradient(139deg, #1F1F1F 26.92%, #FFF 236.63%);
 }

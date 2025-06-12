@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once 'vendor/autoload.php';
 
 use Twig\Loader\FilesystemLoader;
@@ -14,33 +18,10 @@ $twig = new Environment($loader, [
 ]);
 $twig->addExtension(new DebugExtension());
 
-$key = '373114775';
-
-if (isset($_COOKIE['token'])) {
-    $decoded = JWT::decode($_COOKIE['token'], new Key($key, 'HS256'));
-
-    $expiration = $decoded->exp;
-    $userId = $decoded->id;
-    $user = [
-        'username'  => $decoded->username,
-        'firstname' => $decoded->firstname,
-        'lastname'  => $decoded->lastname
-    ];
-
-
-
-    if ($decoded->exp < time()) {
-        setcookie('token', '', time() - 3600, '/');
-        header('Location: login.php');
-        exit;
-    }
-} else {
-    header('Location: login.php');
-}
 
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "claude_admin";
+$password = "jhqKUt6rNYBc964tSVXQYcsmN ";
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=aska", $username, $password);
@@ -48,6 +29,9 @@ try {
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
 }
+
+$host = $_SERVER['HTTP_HOST'];
+
 
 $req = $bdd->prepare("SELECT * FROM domain");
 $req->execute();
@@ -57,7 +41,6 @@ if (count($domains) > 0) {
 }
 
 
-echo $twig->render('panel.html.twig', [
-    'user' => $user,
-    'domains' => $domains
+echo $twig->render('page.html.twig', [
+    'host' => $host
 ]);

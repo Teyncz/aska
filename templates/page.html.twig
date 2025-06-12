@@ -1,0 +1,129 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<section class="h-[80vh]">
+		<section class="absolute flex top-0 w-full h-[80vh] z-[-999]">
+			<div class="absolute flex w-full h-full bg-[#00000077] z-0"></div>
+			<div id="SliderContainer" class="flex transition-all duration-700 z-[-999]">
+				<div class="carousel-item transition-all duration-500 w-[100vw] h-full bg-cover bg-center bg-[url(public/img/mobilier-biosource-fr/image-1.jpg)] z-[-999]"></div>
+				<div class="carousel-item transition-all duration-500 w-[100vw] h-full bg-cover bg-center bg-[url(public/img/mobilier-biosource-fr/image-1.jpg)] z-[-999]"></div>
+                <div class="carousel-item transition-all duration-500 w-[100vw] h-full bg-cover bg-center bg-[url(public/img/mobilier-biosource-fr/image-1.jpg)] z-[-999]"></div>
+			</div>
+		</section>
+		<section class="flex flex-col max-w-[1400px] mx-auto">
+			<div class="w-full flex flex-col justify-center items-center my-[50px] gap-[20px]">
+				<img src="public/img/aska_white.png">
+				<h1 class="text-white font-[400] text-[22px]">Mobilier biosourcé PaperStone®</h1>
+			</div>
+			<h2 class="text-white font-[600] text-[48px] relative z-999">Des matériaux au service d’un mobilier responsable</h2>
+			<p class="text-white font-[300] text-[18px] max-w-[1000px] leading-[2] tracking-[1px] ">Aska met en avant une nouvelle génération de matériaux écologiques, sans compromis sur le design. Grâce à PaperStone®, Aska Interior propose du mobilier élégant, durable et sans dérivés fossiles. Alliez esthétisme et conscience environnementale.</p>
+
+			<a href="https://linktr.ee/aska_interior.fr" target="_blank" class="w-[300px] h-[40px] border border-white flex items-center justify-center text-[#5A5A5A] mt-[20px] cta">En savoir plus</a>
+		</section>
+	</section>
+	<section class="w-full h-[20vh] flex flex-col items-center justify-center">
+		<h5 class="text-[24px] font-[500]">Des questions ou un projet ? Discutons-en.</h5>
+		<a href="#ContactForm" class="w-[300px] h-[40px] border border-black flex items-center justify-center text-black mt-[20px]">Contactez-nous</a>
+	</section>
+
+	<section class="pb-[100px] pt-[30px]">
+		<form id="ContactForm" class="max-w-[600px] w-full flex flex-col mx-auto gap-[10px]">
+			<div class="flex gap-[10px] w-full">
+				<input class="h-[46px] rounded-[4px] border border-[#454545] px-[30px] w-full" type="text" name="name" placeholder="Nom"/>
+				<input class="h-[46px] rounded-[4px] border border-[#454545] px-[30px] w-full" type="text" name="firstname" placeholder="Prénom"/>
+			</div>
+			<input class="h-[46px] rounded-[4px] border border-[#454545] px-[30px]" type="text" name="phone" placeholder="Téléphone"/>
+			<input class="h-[46px] rounded-[4px] border border-[#454545] px-[30px]" type="email" name="email" placeholder="Email"/>
+			<textarea class="rounded-[4px] border border-[#454545] px-[30px] pt-[10px]" name="message" rows="10" placeholder="Message"></textarea>
+			<div class="flex gap-[10px]">
+				<input type="checkbox">
+				<p class="text-[14px] font-[300]">J'accepte le traitement de mes données tel que décrit dans les
+					<a href="" class="underline">mentions légales</a>.</p>
+			</div>
+			<button class="bg-[#C03C3A] rounded-[4px] h-[46px] w-full text-white hover:scale-97 transition duration-300 cursor-pointer" type="submit" value="Envoyer" name="login">Envoyer</button>
+
+		</form>
+	</section>
+	<footer class="footer_gradiant text-white">
+		<div class="flex w-full justify-center">
+			<img class="hover:scale-[.98] origin-top transition duration-300" src="public/img/ASKA_footer.svg" alt="certificat guide">
+		</div>
+		<section class="w-full flex gap-[100px] justify-center mt-[100px] pb-[50px]">
+			<div class="flex flex-col gap-[20px] items-center">
+				<img class="h-[70px] hover:scale-[.98] origin-top transition duration-300" src="public/img/LogoAside.jpg" alt="certificat guide">
+				<ul class="flex gap-[10px]">
+					<li>
+						<a target="_blank" href="https://facebook.com/askainterior"><img class="h-[20px]" src="public/img/Facebook.svg" alt="logo Facebook"></a>
+					</li>
+					<li>
+						<a target="_blank" href="https://instagram.com/aska_interior"><img class="h-[20px]" src="public/img/Instagram.svg" alt="logo Facebook"></a>
+					</li>
+					<li>
+						<a target="_blank" href="https://www.linkedin.com/company/aska-interior"><img class="h-[20px]" src="public/img/LinkedIn.svg" alt="logo Facebook"></a>
+					</li>
+				</ul>
+			</div>
+			<div class="flex flex-col gap-[15px]">
+				<p class="text-[16px] font-[400]">Informations générales</p>
+				<div class="flex flex-col gap-[20px]">
+					<div class="flex flex-col gap-[20px] text-[14x] font-[300]">
+						<ul>
+							<li>Aska SARL</li>
+							<li>Strasbourg, France</li>
+						</ul>
+						<ul>
+							<li>contact@askapro.fr</li>
+							<li>+33 3 88 30 12 14</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="flex flex-col gap-[15px]">
+				<p class="text-[16px] font-[400]">Le collectif</p>
+				<ul class="font-[300]">
+					<li>
+						<a href="">À propos</a>
+					</li>
+					<li>
+						<a href="">Équipe</a>
+					</li>
+				</ul>
+			</div>
+			<div class="flex flex-col gap-[15px]">
+				<p class="text-[16px] font-[400]">Besoin d'aide ?</p>
+				<ul class="font-[300]">
+					<li>
+						<a href="">FAQ</a>
+					</li>
+					<li>
+						<a href="">Contactez-nous</a>
+					</li>
+				</ul>
+			</div>
+			<div class="flex flex-col gap-[15px]">
+				<p class="text-[16px] font-[400]">Informations légales</p>
+				<ul class="font-[300]">
+					<li>
+						<a href="">Politique de confidentialité</a>
+					</li>
+					<li>
+						<a href="">Termes et conditions</a>
+					</li>
+					<li>
+						<a href="">Préférences de cookie</a>
+					</li>
+					<li>
+						<a href="">Conditions générales d'utilisation</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<span class="max-w-[1200px] h-[1px] flex bg-white mx-auto"></span>
+		<p class="text-center text-[15px] py-[15px]">2025 © Copyright
+			{{ host|split('.')|first }}. Tous droits réservés.</p>
+	</footer>
+{% endblock %}
+
+{% block scripts %}
+	 <script src="public/script/index.js"></script>
+{% endblock %}

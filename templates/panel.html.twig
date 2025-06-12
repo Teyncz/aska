@@ -2,15 +2,29 @@
 
 {% block body %}
 
-    <h1>Bonjour, {{user.firstname|capitalize}}</h1>
-    
-    <aside>
-    <ul>
-        {% for domain in domains %}
-            <li><a href="http://{{domain.name}}">{{domain.name}}</a></li>
-        {% endfor %}
-
-    </ul>
-    </aside>
+	<section class="h-[100vh] w-[100vw] flex gap-[40px]">
+		{% include 'nav_panel.html.twig' with { page } %}
+		<main class="flex flex-col mt-[40px]">
+			<h1 class="text-[36px] font-[500] pb-[40px]">Bonjour
+				{{user.firstname|capitalize}}</h1>
+			<section>
+				<div class="">
+					<h3 class="text-[#C03C3A] text-[24px] font-[500]">Domaines</h3>
+					<p class="font-[300] text-[16px] leading-none">Vous avez configuré
+						{{ domains|length }}
+						{{ domains|length > 1 ? 'domaines' : 'domaine' }}</p>
+					<a href="domains.php" class="w-full hover:scale-97 transition-all duration-300 flex bg-[#404040] h-[30px] text-white text-[14px] font-[400] rounded-[4px] items-center justify-center mt-[25px] mb-[15px]">Tout voir</a>
+				</div>
+				<ul class="flex flex-col gap-[15px]">
+					{% for domain in domains %}
+						<li class="flex gap-[10px] items-center">
+							<span class="h-[10px] w-[10px] bg-[#68BD5D] block rounded-full"></span>
+							<a class="leading-none" href="http://{{domain.name}}">{{domain.name}}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</section>
+		</main>
+	</section>
 
 {% endblock %}
