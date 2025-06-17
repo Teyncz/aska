@@ -43,7 +43,7 @@ if (isset($_COOKIE['token'])) {
 
     $servername = "localhost";
     $username = "claude_admin";
-    $password = "jhqKUt6rNYBc964tSVXQYcsmN ";
+    $password = "jhqKUt6rNYBc964tSVXQYcsmN";
 
     try {
         $bdd = new PDO("mysql:host=$servername;dbname=aska", $username, $password);
@@ -86,8 +86,8 @@ if (isset($_COOKIE['token'])) {
         <form class="w-full mx-auto flex flex-col gap-[30px]" method="POST" action="">
             <div class="flex flex-col gap-[20px]">
                 <div class="flex flex-col gap-[10px]">
-                    <label class="text-[15px]">Adresse email</label>
-                    <input class="h-[46px] rounded-[4px] border border-[#454545] px-[30px]" type="email" placeholder="Adresse email" id="email" name="email" require />
+                    <label class="text-[15px]">Utilisateur</label>
+                    <input class="h-[46px] rounded-[4px] border border-[#454545] px-[30px]" type="text" placeholder="Utilisateur" id="email" name="email" require />
                 </div>
                 <div class="flex flex-col gap-[10px]">
                     <label>Mot de passe</label>

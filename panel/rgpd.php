@@ -53,21 +53,16 @@ try {
     echo "Erreur : " . $e->getMessage();
 }
 
-
-$req = $bdd->prepare("SELECT * FROM domain");
+$req = $bdd->prepare("SELECT * FROM rgpd");
 $req->execute();
-$domains = $req->fetchAll();
-if (count($domains) > 0) {
+$rgpd = $req->fetchAll();
+if (count($rgpd) > 0) {
 } else {
 }
 
-foreach ($domains as &$domain) {
-    $domain['ip'] = gethostbyname($domain['name']);
-}
 
-
-echo $twig->render('domains.html.twig', [
+echo $twig->render('rgpd.html.twig', [
     'user' => $user,
-    'domains' => $domains,
-    'page' => 'domains'
+    'rgpd' => $rgpd,
+    'page' => 'rgpd'
 ]);

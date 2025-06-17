@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<main class="max-w-[900px] mx-auto my-[100px]">
+		<img class="w-[200px] pb-[50px]" src="public/img/LogoAside.jpg">
+		<h1 class="text-center text-[28px] font-[600] mb-[50px]">{{rgpd.type|nl2br}}</h1>
+		<p>{{ rgpd.content| replace({'$[DOMAIN]': domain})| e | nl2br }}</p>
+	</main>
+	<footer class="footer_gradiant text-white">
+		<div class="flex w-full justify-center">
+			<img class="hover:scale-[.98] origin-top transition duration-300" src="public/img/ASKA_footer.svg" alt="certificat guide">
+		</div>
+		<section class="w-full flex gap-[100px] justify-center mt-[100px] pb-[50px]">
+			<div class="flex flex-col gap-[20px] items-center">
+				<img class="h-[70px] hover:scale-[.98] origin-top transition duration-300" src="public/img/LogoAside.jpg" alt="certificat guide">
+				<ul class="flex gap-[10px]">
+					<li>
+						<a target="_blank" href="https://facebook.com/askainterior"><img class="h-[20px]" src="public/img/Facebook.svg" alt="logo Facebook"></a>
+					</li>
+					<li>
+						<a target="_blank" href="https://instagram.com/aska_interior"><img class="h-[20px]" src="public/img/Instagram.svg" alt="logo Facebook"></a>
+					</li>
+					<li>
+						<a target="_blank" href="https://www.linkedin.com/company/aska-interior"><img class="h-[20px]" src="public/img/LinkedIn.svg" alt="logo Facebook"></a>
+					</li>
+				</ul>
+			</div>
+			<div class="flex flex-col gap-[15px]">
+				<p class="text-[16px] font-[400]">Informations générales</p>
+				<div class="flex flex-col gap-[20px]">
+					<div class="flex flex-col gap-[20px] text-[14x] font-[300]">
+						<ul>
+							<li>Aska SARL</li>
+							<li>Strasbourg, France</li>
+						</ul>
+						<ul>
+							<li>contact@askapro.fr</li>
+							<li>+33 3 88 30 12 14</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="flex flex-col gap-[15px]">
+				<p class="text-[16px] font-[400]">Le collectif</p>
+				<ul class="font-[300]">
+					<li>
+						<a href="">À propos</a>
+					</li>
+					<li>
+						<a href="">Équipe</a>
+					</li>
+				</ul>
+			</div>
+			<div class="flex flex-col gap-[15px]">
+				<p class="text-[16px] font-[400]">Besoin d'aide ?</p>
+				<ul class="font-[300]">
+					<li>
+						<a href="">FAQ</a>
+					</li>
+					<li>
+						<a href="">Contactez-nous</a>
+					</li>
+				</ul>
+			</div>
+			<div class="flex flex-col gap-[15px]">
+				<p class="text-[16px] font-[400]">Informations légales</p>
+				<ul class="font-[300]">
+					<li>
+						<a href="mentions-legales.php">Mentions Légales</a>
+					</li>
+					<li>
+						<a href="">Préférences de cookie</a>
+					</li>
+					<li>
+						<a href="cgu.php">Conditions générales d'utilisation</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<span class="max-w-[1200px] h-[1px] flex bg-white mx-auto"></span>
+		<p class="text-center text-[15px] py-[15px]">2025 © Copyright
+			{{ host|split('.')|first }}. Tous droits réservés.</p>
+	</footer>
+{% endblock %}

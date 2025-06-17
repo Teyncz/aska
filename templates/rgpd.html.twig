@@ -1,0 +1,51 @@
+{% extends "base_panel.html.twig" %}
+
+{% block body %}
+	<section class="h-[100vh] w-[100vw] flex overflow-hidden">
+		{% include 'nav_panel.html.twig' with { page } %}
+
+		<main class="flex flex-col w-full relative">
+			<section id="overlay" class="bg-[#00000044] transition-all duration-300 w-full h-full absolute z-998 pointer-events-none" style="opacity: 0 "></section>
+			<section class="flex flex-col w-full pl-[40px]">
+				<div class="pb-[40px] flex flex-col gap-[10px] mt-[40px]">
+					<h1 class="text-[36px] font-[500]">RGPD</h1>
+				</div>
+				<section class="">
+					<ul class="flex flex-col gap-[20px]">
+						{% for type in rgpd %}
+							<li class="w-[350px] h-[100px] rounded-[5px] bg-[#F4F6F8] px-[20px] py-[15px] flex flex-col justify-between">
+								<div class="contentArea top-0 rounded-[5px] bg-[#F4F6F8] absolute mt-[150px] w-[70%] h-[70%] flex flex-col items-center z-999 p-[20px] gap-[30px]" style="display: none">
+									<div class="flex justify-between w-full">
+										<h4 class="text-[18px] font-[500]">Modifier le contenu</h4>
+										<button id="CloseFormBtn" type="button" class="cursor-pointer hover:scale-95 transition-all duration-100 group">
+											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_18_2)">
+													<path class="group-hover:fill-[#C03C3A] transition-all duration-200" d="M11.7676 10.0002L19.634 2.13472C20.1223 1.64642 20.1223 0.854731 19.634 0.366469C19.1457 -0.121831 18.354 -0.121831 17.8658 0.366469L10.0002 8.23279L2.13472 0.366469C1.64642 -0.121831 0.854731 -0.121831 0.366469 0.366469C-0.121792 0.85477 -0.121831 1.64646 0.366469 2.13472L8.23279 10.0002L0.366469 17.8658C-0.121831 18.3541 -0.121831 19.1457 0.366469 19.634C0.85477 20.1223 1.64646 20.1223 2.13472 19.634L10.0002 11.7676L17.8657 19.634C18.354 20.1223 19.1457 20.1223 19.634 19.634C20.1223 19.1457 20.1223 18.354 19.634 17.8658L11.7676 10.0002Z" fill="#404040"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_18_2">
+														<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+											</svg>
+										</button>
+									</div>
+									<textarea class="w-full resize-none bg-white p-[30px] rounded-[5px] h-full" rows="30" name="" id="content">{{type.content}}</textarea>
+									<p style="display: none" class="text-[16px] font-[400]" id="responseStatus"></p>
+									<button aria-label="{{type.type}}" id="SaveBtn" class="bg-[#404040] rounded-[4px] min-h-[30px] h-[30px] w-[250px] text-[14px] text-white hover:scale-97 transition duration-300 cursor-pointer">Enregistrer</button>
+								</div>
+								<h4>{{type.type}}</h4>
+								<button id="ShowFormBtn" class="bg-[#404040] rounded-[4px] min-h-[30px] h-[30px] w-[250px] text-[14px] text-white hover:scale-97 transition duration-300 cursor-pointer">Modifier</button>
+							</li>
+						{% endfor %}
+					</ul>
+				</section>
+			</section>
+		</main>
+	</section>
+
+{% endblock %}
+
+{% block scripts %}
+	 <script type="module" src="../public/script/rgpd.js"></script>
+{% endblock %}

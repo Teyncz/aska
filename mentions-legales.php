@@ -5,8 +5,6 @@ error_reporting(E_ALL);
 
 require_once 'vendor/autoload.php';
 
-include 'include/conn.php';
-
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
@@ -20,7 +18,6 @@ $twig = new Environment($loader, [
 ]);
 $twig->addExtension(new DebugExtension());
 
-
 $servername = "localhost";
 $username = "claude_admin";
 $password = "jhqKUt6rNYBc964tSVXQYcsmN";
@@ -32,19 +29,13 @@ try {
     echo "Erreur : " . $e->getMessage();
 }
 
+$req = $bdd->prepare("SELECT * FROM rgpd where type = 'Mentions légales' ");
+$req->execute();
+$rgpd = $req->fetch(PDO::FETCH_ASSOC);
+
 $host = $_SERVER['HTTP_HOST'];
-$host = preg_replace('/^www\./', '', $host);
 
-
-$sql = ("SELECT * FROM domain WHERE name = :host");
-$pdo = __main_conn();
-$query = $pdo->prepare($sql);
-$query->bindValue(':host', $host, PDO::PARAM_STR);
-$query->execute();
-$domain = $query->fetch(PDO::FETCH_ASSOC);
-
-
-echo $twig->render('page.html.twig', [
-    'host' => $host,
-    'domain' => $domain
+echo $twig->render('mentions-legales.html.twig', [
+    'rgpd' => $rgpd,
+    'domain' => $host
 ]);

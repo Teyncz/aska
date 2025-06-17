@@ -44,7 +44,7 @@ if (isset($_COOKIE['token'])) {
 
 $servername = "localhost";
 $username = "claude_admin";
-$password = "jhqKUt6rNYBc964tSVXQYcsmN ";
+$password = "jhqKUt6rNYBc964tSVXQYcsmN";
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=aska", $username, $password);
@@ -60,9 +60,17 @@ if (count($domains) > 0) {
 } else {
 }
 
+$req = $bdd->prepare("SELECT * FROM certificats");
+$req->execute();
+$certificats = $req->fetchAll();
+if (count($certificats) > 0) {
+} else {
+}
+
 
 echo $twig->render('panel.html.twig', [
     'user' => $user,
     'domains' => $domains,
+    'certificats' => $certificats,
     'page' => 'overview'
 ]);

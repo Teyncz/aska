@@ -54,7 +54,7 @@ try {
 }
 
 
-$req = $bdd->prepare("SELECT * FROM domain");
+$req = $bdd->prepare("SELECT domain.* FROM domain LEFT JOIN certificats ON domain.name = certificats.domain WHERE certificats.domain IS NULL;");
 $req->execute();
 $domains = $req->fetchAll();
 if (count($domains) > 0) {
@@ -65,9 +65,44 @@ foreach ($domains as &$domain) {
     $domain['ip'] = gethostbyname($domain['name']);
 }
 
+$output = [];
+$return_var = 0;
+exec('sudo /usr/local/bin/get-cert.sh', $output, $return_var);
 
-echo $twig->render('domains.html.twig', [
+if ($return_var === 0) {
+
+    $certificates = [];
+    foreach ($output as $line) {
+        if (strpos($line, 'Domaine') === 0) continue;
+
+        $parts = explode("\t", $line);
+        if (count($parts) >= 6) {
+            $issuer =  $parts[4];
+
+            if (preg_match('/O=([^,]+)/', $issuer, $matches)) {
+                $organization = trim($matches[1]);
+            } else {
+                echo "Organisation non trouvée";
+            }
+
+            $certificates[] = [
+                'domain' => $parts[0],
+                'not_before' => $parts[1],
+                'not_after' => $parts[2],
+                'serial' => $parts[3],
+                'issuer' => $organization,
+                'valid' => $parts[5]
+            ];
+        }
+    }
+} else {
+    echo "Erreur lors de l'exécution du script.";
+}
+
+
+echo $twig->render('certificats.html.twig', [
     'user' => $user,
     'domains' => $domains,
-    'page' => 'domains'
+    'page' => 'certificats',
+    'certificates' => $certificates
 ]);

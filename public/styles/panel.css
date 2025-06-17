@@ -1,5 +1,5 @@
-* {
-  scroll-behavior: smooth;
+*, html {
+    scroll-behavior: smooth !important;
 }
 
 @font-face {
@@ -48,7 +48,7 @@
   font-family: "SF Pro Display", sans-serif;
 }
 
-input:focus, input:focus-visible, textarea{
+input:focus, input:focus-visible, textarea, select{
     outline: none;
 }
 
@@ -88,6 +88,37 @@ textarea{
   width: 300px;
   height: 40px;
   background: #ffffff;
+  transition: all 0.3s
+}
+
+.cta-dark{
+  z-index: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s;
+  cursor: pointer
+}
+
+.cta-dark:hover {
+  color:rgb(255, 255, 255);
+  transition: all 0.2s;
+}
+
+.cta-dark:hover::after {
+  transform: translateX(0%);
+  transition: all 0.3s
+}
+
+.cta-dark::after{
+  z-index: -1;
+  display: flex;
+  position: absolute;
+  content: '';
+  width: 300px;
+  height: 40px;
+  transform: translateX(100%);
+  background:rgb(0, 0, 0);
   transition: all 0.3s
 }
 

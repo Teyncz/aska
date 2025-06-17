@@ -44,7 +44,7 @@ if (isset($_COOKIE['token'])) {
 
 $servername = "localhost";
 $username = "claude_admin";
-$password = "jhqKUt6rNYBc964tSVXQYcsmN ";
+$password = "jhqKUt6rNYBc964tSVXQYcsmN";
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=aska", $username, $password);

@@ -1,0 +1,101 @@
+{% extends "base_panel.html.twig" %}
+
+{% block body %}
+	<section class="h-[100vh] w-[100vw] flex">
+		{% include 'nav_panel.html.twig' with { page } %}
+
+		<main class="flex flex-col w-full relative">
+			<section id="FormWrapper" class="z-999 h-full w-full absolute pl-[39px] pt-[50px] backdrop-blur-[1px] bg-[#00000044]" style="display : none;">
+				<div class="h-fit max-w-[800px] w-full bg-[#F4F6F8] shadow rounded-[5px] px-[20px] pb-[50px]">
+					<div class=" py-[15px] flex flex-col">
+						<div class="flex justify-between">
+							<h4 class="text-[18px] font-[500]">Ajouter un domaine</h4>
+							<button id="CloseFormBtn" type="button" class="cursor-pointer hover:scale-95 transition-all duration-100 group">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_18_2)">
+										<path class="group-hover:fill-[#C03C3A] transition-all duration-200" d="M11.7676 10.0002L19.634 2.13472C20.1223 1.64642 20.1223 0.854731 19.634 0.366469C19.1457 -0.121831 18.354 -0.121831 17.8658 0.366469L10.0002 8.23279L2.13472 0.366469C1.64642 -0.121831 0.854731 -0.121831 0.366469 0.366469C-0.121792 0.85477 -0.121831 1.64646 0.366469 2.13472L8.23279 10.0002L0.366469 17.8658C-0.121831 18.3541 -0.121831 19.1457 0.366469 19.634C0.85477 20.1223 1.64646 20.1223 2.13472 19.634L10.0002 11.7676L17.8657 19.634C18.354 20.1223 19.1457 20.1223 19.634 19.634C20.1223 19.1457 20.1223 18.354 19.634 17.8658L11.7676 10.0002Z" fill="#404040"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_18_2">
+											<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+								</svg>
+							</button>
+						</div>
+					</div>
+					<form class="flex flex-col gap-[20px]">
+						<div class="flex flex-col gap-[10px]">
+							{% if domains|length > 0 %}
+								<label class="text-[15px]">Domaines sans certificat</label>
+								<select class="h-[46px] px-[30px] border border-[#404040] rounded-[5px] max-w-[400px]" name="domain" id="domain">
+									{% for domain in domains %}
+										<option value={{domain.name}}>{{domain.name}}</option>
+									{% endfor %}
+								</select>
+								<label class="text-[15px]">Email de notification</label>
+								<input class="h-[46px] rounded-[4px] border border-[#454545] px-[30px] max-w-[400px]" id="email" placeholder="contact@domain.fr" autocomplete="off" type="email require">
+							{% else %}
+								<p class="text-[15px]">Tous les domaines possèdent un certificat</p>
+							{% endif %}
+						</div>
+						<div style="display: none" id="certificatStatus" class="flex items-center gap-[10px]">
+							<span class="h-[10px] w-[10px] rounded-full"></span>
+							<p></p>
+						</div>
+						<button id="SubmitDomain" class="bg-[#404040] rounded-[4px] h-[30px] w-[250px] text-[14px] text-white hover:scale-97 transition duration-300 cursor-pointer" type="button">Générer un certificat</button>
+					</form>
+				</div>
+			</section>
+			<section class="flex flex-col w-full relative pl-[40px]">
+				<div class="pb-[40px] flex flex-col gap-[10px] mt-[40px]">
+					<h1 class="text-[36px] font-[500]">Certificats</h1>
+					<button id="ShowFormBtn" class="bg-[#404040] rounded-[4px] h-[30px] w-[250px] text-[14px] text-white hover:scale-97 transition duration-300 cursor-pointer">Ajouter un certificat</button>
+				</div>
+				<section>
+					<table class="flex flex-col gap-[30px]">
+						<thead>
+							<tr class="flex">
+								<th scope="col" class="w-[300px] flex justify-start text-[16px] font-[400]">Domaine</th>
+								<th scope="col" class="w-[175px] flex justify-start text-[16px] font-[400]">Date d'émission</th>
+								<th scope="col" class="w-[150px] flex justify-start text-[16px] font-[400]">Date d'éxpiration</th>
+								<th scope="col" class="w-[250px] flex justify-start text-[16px] font-[400]">Organisation</th>
+								<th scope="col" class="w-[225px] flex justify-start text-[16px] font-[400]">Etat</th>
+								<th scope="col" class="w-[50px] flex justify-start text-[16px] font-[400]"></th>
+							</tr>
+						</thead>
+						<tbody id="certificatsList" class="flex flex-col gap-[20px]">
+							{% for certificate in certificates %}
+								<tr class="flex" aria-label="{{certificate.domain}}">
+									<th aria-label="domain-name" class="w-[300px] flex justify-start text-[16px] font-[300]" scope="row">{{certificate.domain ? certificate.domain : 'null'}}</th>
+									<td class="w-[175px] flex justify-start text-[16px] font-[300]">{{certificate.not_before ? certificate.not_before | date("d-m-Y") : 'null'}}</td>
+									<td class="w-[150px] flex justify-start text-[16px] font-[300]">{{certificate.not_after ? certificate.not_after | date("d-m-Y") : 'null'}}</td>
+									<td class="w-[250px] flex justify-start text-[16px] font-[300]">{{certificate.issuer ? certificate.issuer : 'null'}}</td>
+									<td class="w-[225px] flex justify-start text-[16px] font-[300]">{{certificate.valid ? certificate.valid : 'null'}}</td>
+									<td class="w-[50px] flex justify-start text-[16px] font-[300] relative">
+										<button type="button" aria-label="{{certificate.domain}}" class="group cursor-pointer ShowOptionsBtn">
+											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
+												<path class="group-hover:fill-[#C03C3A]" d="M10.0001 4.16664C11.1507 4.16664 12.0834 3.23391 12.0834 2.08332C12.0834 0.932734 11.1507 0 10.0001 0C8.84948 0 7.91675 0.932734 7.91675 2.08332C7.91675 3.23391 8.84948 4.16664 10.0001 4.16664Z" fill="#1E1E1E"/>
+												<path class="group-hover:fill-[#C03C3A]" d="M10.0001 12.0833C11.1507 12.0833 12.0834 11.1506 12.0834 9.99999C12.0834 8.84941 11.1507 7.91667 10.0001 7.91667C8.84948 7.91667 7.91675 8.84941 7.91675 9.99999C7.91675 11.1506 8.84948 12.0833 10.0001 12.0833Z" fill="#1E1E1E"/>
+												<path class="group-hover:fill-[#C03C3A]" d="M10.0001 20C11.1507 20 12.0834 19.0672 12.0834 17.9167C12.0834 16.7661 11.1507 15.8333 10.0001 15.8333C8.84948 15.8333 7.91675 16.7661 7.91675 17.9167C7.91675 19.0672 8.84948 20 10.0001 20Z" fill="#1E1E1E"/>
+											</svg>
+										</button>
+										<div style="display: none" class="DomainOptionPopUp bg-[#F4F6F8] w-[135px] px-[20px] py-[10px] absolute top-0 translate-x-[30px] rounded-[4px] flex flex-col gap-[5px] items-start">
+											<button type="button" aria-label="{{certificate.domain}}" class="text-[16px] hover:underline cursor-pointer">Modifier</button>
+											<button type="button" aria-label="{{certificate.domain}}" class="deleteCertificatBtn text-[#C03C3A] text-[16px] hover:underline cursor-pointer">Supprimer</button>
+										</div>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</section>
+			</section>
+		</main>
+	</section>
+
+{% endblock %}
+
+{% block scripts %}
+	 <script type="module" src="../public/script/add-certificat.js"></script>
+{% endblock %}
